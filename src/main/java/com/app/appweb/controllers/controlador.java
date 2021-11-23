@@ -9,6 +9,8 @@ import com.app.appweb.controllers.model.Partyroom;
 import com.app.appweb.controllers.model.Reservations;
 import com.app.appweb.controllers.model.Score;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,16 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class controlador {
 
     @Autowired
     private ManejadorEntidad manejador;
 
-
-    @RequestMapping(value = "/" , method = RequestMethod.GET)
-    public String Bienvenido(){
-        return "<h1>Hola Mundo</h1>";
+    @GetMapping(value = "/")
+    public String index(){
+        return "index";
     }
+    
 
     @RequestMapping(value = "/api/Category/save" , method = RequestMethod.POST)
     public void categoriasPublicar(@RequestBody Category category){
